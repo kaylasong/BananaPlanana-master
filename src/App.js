@@ -39,7 +39,7 @@ class App extends Component {
   }
 
   displayInformation=()=>{
-    if(this.state.ripeness===0){
+    if(this.state.ripeness==="0"){
       return(
       <div className="information">
         <div className="info">
@@ -60,7 +60,7 @@ class App extends Component {
       </div>
       );
     }
-    else if(this.state.ripeness===1){
+    else if(this.state.ripeness==="1"){
       return(
       <div className="information">
         <div className="info">
@@ -77,7 +77,7 @@ class App extends Component {
       </div>
       );
     }
-    else if(this.state.ripeness===2){
+    else if(this.state.ripeness==="2"){
       return(
       <div className="information">
         <div className="info">
