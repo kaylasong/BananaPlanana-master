@@ -9,7 +9,7 @@ class App extends Component {
       mainText: "boo",
       image: null,
       loading: false,
-      ripeness: -1
+      ripeness: "-1"
     }
     this.setLoading=this.setLoading.bind(this)
       this.setRipeness=this.setRipeness.bind(this)
