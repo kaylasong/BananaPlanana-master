@@ -25,5 +25,5 @@ def upload_file():
     os.rename(fileN,"bananaIMG.jpg")
     ripe=core("bananaIMG.jpg")
     print("POST FINAL PROCESSING: " + str(ripe))
-    return jsonify(ripe)
+    return str(ripe)
 app.run(port=5000, debug=True)

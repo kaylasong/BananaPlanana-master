@@ -16,7 +16,7 @@ def buffer(x, y):
         return True
 
 def colorAnalyze(arc):
-    # arc = np.load(route)
+    # arc = np.load("maskedbanana")
     valid_count = []
     blu_conch = 0
     red_conch = 0
@@ -46,8 +46,9 @@ def colorAnalyze(arc):
         if n[0] > n[1] + 50 and n[0] > n[2]:
             red_conch = red_conch + 1
 
-    comp = len(valid_count) - whitespace
-
+    comp = len(valid_count) # - whitespace
+    if(comp == 0):
+	comp = 1
     if (gre_conch / comp) > yellow_conch / comp:
         return 0  # print("unripe")
     elif (black / comp) > (0.5 * yellow_conch / comp):
@@ -111,10 +112,10 @@ def markBackground(filename):
     masked = (masked * 255).astype('uint8')  # Convert back to 8-bit
 
     masked = cv2.cvtColor(masked, cv2.COLOR_BGR2RGB)
-    np.save("bananaMASKED14", masked)
-    mpl.image.imsave('bananaMASKED14.jpg', masked)
-    plt.imshow(masked)
-    plt.show()
+    # np.save("bananaMASKED14", masked)
+    # mpl.image.imsave('bananaMASKED14.jpg', masked)
+    # plt.imshow(masked)
+    # plt.show()
 
     # cv2.imwrite('C:/Temp/person-masked.jpg', masked)           # Save
 
@@ -126,7 +127,7 @@ def cropBox(img, v):
     # v is a list of vertices, [[x,y], [x,y]]
     x, y = v[0][0]+2, v[0][1]+2
     h, w = abs(y - v[1][1] - 2), abs(x - v[1][0] - 2)
-    
+
     #x, y = v[0]
     #h, w = abs(y-v[1][1]), abs(x - v[1][0])
     img = cv2.imread(img)
@@ -193,7 +194,8 @@ def core(route):
         imagelist.append(cropBox(route, [vertices[i], vertices[i+2]]))
     tally = [0, 0, 0]
     for img in imagelist:
-        tally[colorAnalyze(img)] += 1
+        image = markBackground(route)
+	tally[colorAnalyze(image)] += 1
     return tally.index(max(tally))
 
 
