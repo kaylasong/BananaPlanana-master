@@ -9,7 +9,7 @@ class App extends Component {
       mainText: "boo",
       image: null,
       loading: false,
-      ripeness: 0
+      ripeness: -1
     }
     this.setLoading=this.setLoading.bind(this)
       this.setRipeness=this.setRipeness.bind(this)
@@ -69,14 +69,10 @@ class App extends Component {
             To ripen your bananas faster, try baking them at 300 degrees Fahrenheit for 15-30 minutes.
         </div>
         <div className="info">
-              Green bananas may provide some additional nutrients and benefits that yellow bananas do not.
-              They're rich in resistant starch and pectin, which are filling, improve digestive health and
-              help lower blood sugar levels. However, some people find that green bananas have a bitter taste
-              and bad texture.
+              Bananas are an excellent source of potassium!
         </div>
         <div className="info">
-              If you want to eat your bananas now, try putting them into a smoothie. The other ingredients can
-              be used to balance out the flavor.
+              Ripe bananas are great for eating straight or for chopping up to put in oatmeal.
         </div>
       </div>
       );
@@ -85,19 +81,17 @@ class App extends Component {
       return(
       <div className="information">
         <div className="info">
-            Banana Diagnosis: Unripe <br/>
-            Time until ripe: 3-4 days <br/>
-            To ripen your bananas faster, try baking them at 300 degrees Fahrenheit for 15-30 minutes.
+            Banana Diagnosis: Overripe <br/>
+            Time until rotten: 3-4 days <br/>
+            To slow the ripening process, try wrapping the connecting end of the banana with plastic wrap.
         </div>
         <div className="info">
-              Green bananas may provide some additional nutrients and benefits that yellow bananas do not.
-              They're rich in resistant starch and pectin, which are filling, improve digestive health and
-              help lower blood sugar levels. However, some people find that green bananas have a bitter taste
-              and bad texture.
+            As a banana ripens, the starchy carbohydrates in them convert into free sugars, thus making
+            these bananas easy to digest, according to dailysuperfoodlove.com. Green bananas, on the other
+            hand, contain starches that are hard to digest.
         </div>
         <div className="info">
-              If you want to eat your bananas now, try putting them into a smoothie. The other ingredients can
-              be used to balance out the flavor.
+              If your banana is overripe, try making banana bread!
         </div>
       </div>
       );
@@ -111,12 +105,10 @@ class App extends Component {
           <img src={require('./peel.png')} className="logo"/> <h1>Appeal</h1>
         </div>
         {this._loadingImage()}
-      <body>
+      <div className="body">
           <IMG loading={this.setLoading} setRipe={this.setRipeness}/>
           {this.displayInformation()}
-
-            
-      </body>
+      </div>
       </div>
     );
   }

@@ -27,11 +27,12 @@ h1{
   width:auto;
 }
 
-body{
+.body{
   display:grid;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 4em;
   z-index:2;
+  height: 100vh;
   background-color: darkseagreen;
 }
 

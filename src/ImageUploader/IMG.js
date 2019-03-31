@@ -88,7 +88,9 @@ class IMG extends Component {
 
             <button 
               type="submit"
-              onClick={(e) => this._handleFindRipeness(e)}>Find Ripeness</button>
+              onClick={(e) => this._handleFindRipeness(e)}>Find Ripeness
+            </button>
+
           </form>
           <div className="imgPreview">
             {$imagePreview}
