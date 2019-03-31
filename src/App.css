@@ -36,7 +36,7 @@ body{
 }
 
 .gif{
-  animation: cssAnimation 0s 2s forwards;
+  animation: cssAnimation 0s 4s forwards;
   visibility: visible;
   position:fixed;
   height: 100px;
@@ -47,7 +47,7 @@ body{
   margin-left: -100px;
 }
 .nowLoading{
-  animation: cssAnimation 0s 2s forwards;
+  animation: cssAnimation 0s 4s forwards;
   visibility: visible;
   top:0;
   position:fixed;

@@ -26,6 +26,7 @@ class IMG extends Component {
     axios({ method: 'post', url: "http://localhost:5000/upload", httpsAgent: agent, data: formData })
       .then(res => {
         console.log(res)
+        this.props.setRipe(res)
       })
       .catch(err => console.warn(err));
 
@@ -88,8 +89,6 @@ class IMG extends Component {
             <button 
               type="submit"
               onClick={(e) => this._handleFindRipeness(e)}>Find Ripeness</button>
-
-              <button onClick={this.props.loading}>Set Loading</button>
           </form>
           <div className="imgPreview">
             {$imagePreview}

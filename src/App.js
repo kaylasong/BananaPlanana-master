@@ -12,6 +12,13 @@ class App extends Component {
       ripeness: 0
     }
     this.setLoading=this.setLoading.bind(this)
+      this.setRipeness=this.setRipeness.bind(this)
+  }
+
+  setRipeness=(num)=>{
+      this.setState({
+          ripeness: num
+      })
   }
 
   setLoading=()=>{
@@ -53,6 +60,48 @@ class App extends Component {
       </div>
       );
     }
+    else if(this.state.ripeness===1){
+      return(
+      <div className="information">
+        <div className="info">
+            Banana Diagnosis: Ripe <br/>
+            Time until ripe: 3-4 days <br/>
+            To ripen your bananas faster, try baking them at 300 degrees Fahrenheit for 15-30 minutes.
+        </div>
+        <div className="info">
+              Green bananas may provide some additional nutrients and benefits that yellow bananas do not.
+              They're rich in resistant starch and pectin, which are filling, improve digestive health and
+              help lower blood sugar levels. However, some people find that green bananas have a bitter taste
+              and bad texture.
+        </div>
+        <div className="info">
+              If you want to eat your bananas now, try putting them into a smoothie. The other ingredients can
+              be used to balance out the flavor.
+        </div>
+      </div>
+      );
+    }
+    else if(this.state.ripeness===2){
+      return(
+      <div className="information">
+        <div className="info">
+            Banana Diagnosis: Unripe <br/>
+            Time until ripe: 3-4 days <br/>
+            To ripen your bananas faster, try baking them at 300 degrees Fahrenheit for 15-30 minutes.
+        </div>
+        <div className="info">
+              Green bananas may provide some additional nutrients and benefits that yellow bananas do not.
+              They're rich in resistant starch and pectin, which are filling, improve digestive health and
+              help lower blood sugar levels. However, some people find that green bananas have a bitter taste
+              and bad texture.
+        </div>
+        <div className="info">
+              If you want to eat your bananas now, try putting them into a smoothie. The other ingredients can
+              be used to balance out the flavor.
+        </div>
+      </div>
+      );
+    }
   }
   
   render() {
@@ -63,7 +112,7 @@ class App extends Component {
         </div>
         {this._loadingImage()}
       <body>
-          <IMG loading={this.setLoading}/>
+          <IMG loading={this.setLoading} setRipe={this.setRipeness}/>
           {this.displayInformation()}
 
             

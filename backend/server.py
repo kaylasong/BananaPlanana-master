@@ -1,14 +1,17 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 import os
-from os import path
+from final import core
+import base64
 
 app=Flask(__name__)
 CORS(app)
 
+
+
 @app.route('/', methods=['GET'])
 def home():
-    return jsonify("Hello World!")
+    return app.send_static_file("index.html")
 
 @app.route('/upload', methods = ['POST'])
 def upload_file():
@@ -16,9 +19,11 @@ def upload_file():
     fileN = request.form.get("fileName")
     print("the file name is: ",fileN)
     fh=open(fileN, "wb")
-    fh.write(fileD.decode('base64'))
+    imageData=base64.b64decode(fileD)
+    fh.write(imageData)
     fh.close()
     os.rename(fileN,"bananaIMG.jpg")
-
-    return "done"
+    ripe=core("bananaIMG.jpg")
+    print("POST FINAL PROCESSING: " + str(ripe))
+    return jsonify(ripe)
 app.run(port=5000, debug=True)

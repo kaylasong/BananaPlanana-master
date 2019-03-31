@@ -121,21 +121,6 @@ def markBackground(filename):
     return masked
 
 
-# markBackground('banana1.jpg')
-# markBackground('banana2.jpg')
-# markBackground('banana4.jpg')
-# markBackground('banana5.jpg')
-# markBackground('banana6.jpg')
-# markBackground('banana7.jpg')
-# markBackground('banana8.jpg')
-# markBackground('banana9.jpg')
-# markBackground('banana10.jpg')
-# markBackground('banana11.jpg')
-# markBackground('banana12.jpg')
-# markBackground('banana13.png')
-# markBackground('banana14.png')
-
-
 def cropBox(img, v):
     # img is the full image
     # v is a list of vertices, [[x,y], [x,y]]
@@ -152,28 +137,28 @@ def cropBox(img, v):
 
 
 def label_check(path):
-	# Instantiates a client
-	client = vision.ImageAnnotatorClient()
+    # Instantiates a client
+    client = vision.ImageAnnotatorClient()
 
-	# The name of the image file to annotate
-	file_name = os.path.join(
-    		os.path.dirname(__file__),
-    		'resources/wakeupcat.jpg')
+    # The name of the image file to annotate
+    #file_name = os.path.join(
+    #		os.path.dirname(__file__),
+    #		'resources/wakeupcat.jpg')
 
-	# Loads the image into memory
-	with open(path, 'rb') as image_file:
-    		content = image_file.read()
+    # Loads the image into memory
+    with open(path, 'rb') as image_file:
+        content = image_file.read()
 
-	image = vision.types.Image(content=content)
+    image = vision.types.Image(content=content)
 
-	# Performs label detection on the image file
-	response = client.label_detection(image=image)
-	labels = response.label_annotations
+    # Performs label detection on the image file
+    response = client.label_detection(image=image)
+    labels = response.label_annotations
 
-	for label in labels:
-		if(label.description == "Banana"):
-			return True
-	return False
+    for label in labels:
+        if(label.description == "Banana"):
+            return True
+    return False
 
 def localize_objects(path):
     """Localize objects in the local image.
@@ -195,33 +180,21 @@ def localize_objects(path):
     #print('Number of objects found: {}'.format(len(objects)))
     for object_ in objects:
         if(object_.name == "Banana" or object_.name == "Food" or object_.name == "Fruit"):
-        	for vertex in object_.bounding_poly.normalized_vertices:
-            		coords.append([int(vertex.x * img.shape[1]), int(vertex.y * img.shape[0])])
+            for vertex in object_.bounding_poly.normalized_vertices:
+                    coords.append([int(vertex.x * img.shape[1]), int(vertex.y * img.shape[0])])
     return coords
 
-def main(route):
-	if(not label_check(route)): 
-		return 3
-		# no  banana was found
-		#print("oh no")
-		#error message
+def core(route):
+    if(not label_check(route)):
+        return 3
+    imagelist = []
+    vertices = localize_objects(route)
+    for i in range(len(vertices)-2):
+        imagelist.append(cropBox(route, [vertices[i], vertices[i+2]]))
+    tally = [0, 0, 0]
+    for img in imagelist:
+        tally[colorAnalyze(img)] += 1
+    return tally.index(max(tally))
 
-	imagelist = []
-	vertices = localize_objects(route)
-	#for i in range(len(vertices)):
-	#	print("x-vertex: " + str(vertices[i][0]))
-	#	print("y-vertex: " + str(vertices[i][1]))
-	for i in range(len(vertices)-2):
-		imagelist.append(cropBox(route, [vertices[i], vertices[i+2]]))
-
-	tally = [0, 0, 0]
-
-	for img in imagelist:
-		tally[colorAnalyze(img)] += 1
-
-	spot = tally.index(max(tally))
-	#print(tally)
-	#print(spot)
-	#return spot
 
 # main(route) # make sure route is established!
