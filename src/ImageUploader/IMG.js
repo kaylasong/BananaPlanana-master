@@ -25,8 +25,8 @@ class IMG extends Component {
     });
     axios({ method: 'post', url: "http://localhost:5000/upload", httpsAgent: agent, data: formData })
       .then(res => {
-        console.log(res)
-        this.props.setRipe(res)
+        console.log(res.data)
+        this.props.setRipe(res.data)
       })
       .catch(err => console.warn(err));
 
